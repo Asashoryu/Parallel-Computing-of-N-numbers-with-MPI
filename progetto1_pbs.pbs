@@ -13,8 +13,40 @@
 # qualche informazione sul job #
 ##############################
 
+# Verifica se la variabile STRATEGY è definita e ha un valore valido
+if [ -z "$STRATEGY" ]; then
+  echo "Errore: La variabile STRATEGY non è definita."
+  exit 1
+fi
+
+if ! [[ "$STRATEGY" =~ ^[1-3]$ ]]; then
+  echo "Errore: La variabile STRATEGY deve essere uno dei valori 1, 2 o 3."
+  exit 1
+fi
+
+# Verifica se le variabili P, N, STRATEGY sono definite e hanno valori validi
+if [ -z "$P" ]; then
+  echo "Errore: La variabile P non è definita."
+  exit 1
+fi
+
+if [ -z "$N" ]; then
+  echo "Errore: La variabile N non è definita."
+  exit 1
+fi
+
+if ! [[ "$P" =~ ^[0-9]+$ ]]; then
+  echo "Errore: La variabile P deve essere un numero intero positivo."
+  exit 1
+fi
+
+if ! [[ "$N" =~ ^[0-9]+$ ]]; then
+  echo "Errore: La variabile N deve essere un numero intero positivo."
+  exit 1
+fi
+
 # Compila ed esegui il programma C
-NCPU='wc -l < $PBS_NODEFILE'
+NCPU=$(wc -l < $PBS_NODEFILE)
 echo ---------------------------
 echo 'Questo job e allocato su '${NCPU}' cpu(s)'
 echo 'Job sta runnando sul nodo(/nodi):'
@@ -33,8 +65,10 @@ echo PBS: node file is $PBS_NODEFILE
 echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
 echo ----------------------
+
 echo "Eseguo/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1_pbs $PBS_O_WORKDIR/progetto1.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1 $PBS_O_WORKDIR/progetto1.c
 echo "Eseguo/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $NCPU $PBS_O_WORKDIR/progetto1"
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np 8 $PBS_O_WORKDIR/progetto1
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $P $PBS_O_WORKDIR/progetto1 2 $N $STRATEGY
 echo "Programma finito!"
+
