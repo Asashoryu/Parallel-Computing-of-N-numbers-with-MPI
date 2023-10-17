@@ -1,0 +1,40 @@
+#!/bin/bash
+#PBS -q studenti
+#PBS -N progetto1_pbs
+#PBS -l nodes=8
+#PBS -o progetto1_pbs.out
+#PBS -e progetto1_pbs.err
+###############################
+# -q coda su cui va eseguito il job #
+# -l numbero di nodi richiest #
+# -N nome job(stesso del file pbs) #
+# -o, -e nome files contenenti l'output #
+##############################
+# qualche informazione sul job #
+##############################
+
+# Compila ed esegui il programma C
+NCPU='wc -l < $PBS_NODEFILE'
+echo ---------------------------
+echo 'Questo job e allocato su '${NCPU}' cpu(s)'
+echo 'Job sta runnando sul nodo(/nodi):'
+cat $PBS_NODEFILE
+
+PBS_O_WORKDIR=$PBS_O_HOME/Progetto1
+echo ----------------------
+echo PBS: qsub sta runnando su $PBS_O_HOST
+echo PBS: queue originante e $PBS_O_QUEUE
+echo PBS: queue eseguente e $PBS_QUEUE
+echo PBS: working directory is $PBS_O_WORKDIR
+echo PBS: execution Mmode is $PBS_ENVIRONMENT
+echo PBS: job identifier is $PBS_JOBID
+echo PBS: job name is $PBS_JOBNAME
+echo PBS: node file is $PBS_NODEFILE
+echo PBS: current home directory is $PBS_O_HOME
+echo PBS: PATH = $PBS_O_PATH
+echo ----------------------
+echo "Eseguo/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1_pbs $PBS_O_WORKDIR/progetto1.c"
+/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1 $PBS_O_WORKDIR/progetto1.c
+echo "Eseguo/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $NCPU $PBS_O_WORKDIR/progetto1"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np 8 $PBS_O_WORKDIR/progetto1
+echo "Programma finito!"
