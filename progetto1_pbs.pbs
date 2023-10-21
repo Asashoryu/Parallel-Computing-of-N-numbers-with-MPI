@@ -7,46 +7,12 @@
 #PBS -o progetto1_pbs.out
 #PBS -e progetto1_pbs.err
 
-# Verify if the STRATEGY variable is defined
-if [ -z "$STRATEGY" ]; then
-  echo "Error: The STRATEGY variable is not defined."
-  exit 1
-fi
+# List of values to test for P and STRATEGY
+P_VALUES=(1 2 3 4 5 6 7 8)
+STRATEGY_VALUES=(1 2 3)
 
-# Verify if the P and N variables are defined and have valid values
-if [ -z "$P" ]; then
-  echo "Error: The P variable is not defined."
-  exit 1
-fi
-
-if [ -z "$N" ]; then
-  echo "Error: The N variable is not defined."
-  exit 1
-fi
-
-if ! [[ "$P" =~ ^[0-9]+$ ]]; then
-  echo "Error: The P variable must be a positive integer."
-  exit 1
-fi
-
-if ! [[ "$N" =~ ^[0-9]+$ ]]; then
-  echo "Error: The N variable must be a positive integer."
-  exit 1
-fi
-
-# Check if STRATEGY is valid (1, 2, or 3)
-if ! [[ "$STRATEGY" =~ ^[1-3]$ ]]; then
-  echo "Error: The STRATEGY variable must be one of the values 1, 2, or 3."
-  exit 1
-fi
-
-# Check if P is 1 or a multiple of 2 only when STRATEGY is 2 or 3
-if [[ "$STRATEGY" == "2" || "$STRATEGY" == "3" ]]; then
-  if [[ $P -ne 1 && $(($P % 2)) -ne 0 ]]; then
-    echo "Error: The P variable must be 1 or a multiple of 2 when STRATEGY is 2 or 3."
-    exit 1
-  fi
-fi
+# Initialize N value
+N=100
 
 # Some information about the job can be placed here
 # Calculate the number of CPUs
@@ -71,12 +37,33 @@ echo "PBS: current home directory is $PBS_O_HOME"
 echo "PBS: PATH = $PBS_O_PATH"
 echo "----------------------"
 
-# Compile and execute the C program
+# Compile the C program
 echo "Compiling $PBS_O_WORKDIR/progetto1.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1 $PBS_O_WORKDIR/progetto1.c
 
-# Establish the number of processes 
-echo "Executing $PBS_O_WORKDIR/progetto1"
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $P $PBS_O_WORKDIR/progetto1 $N $STRATEGY
-
-echo "Program finished!"
+# Loop over STRATEGY and P values
+for STRATEGY in "${STRATEGY_VALUES[@]}"; do
+  for P in "${P_VALUES[@]}"; do
+    # Check if P is 1 or a power of 2 when STRATEGY is 2 or 3
+    if [[ "$STRATEGY" == "2" || "$STRATEGY" == "3" ]]; then
+      if [[ $P -ne 1 && $((P & (P - 1))) -ne 0 ]]; then
+        continue
+      fi
+    fi
+    while true; do
+      N_tmp=$((N * 16))
+      while [ $N -le $N_tmp ]; do
+        echo "Executing $PBS_O_WORKDIR/progetto1 with STRATEGY=$STRATEGY, P=$P, N=$N"
+        # Establish the number of processes 
+        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $P $PBS_O_WORKDIR/progetto1 $N $STRATEGY
+        result=$?
+        if [ $result -ne 0 ]; then
+          echo "Program finished for STRATEGY=$STRATEGY, P=$P, N=$N. Exiting the loop."
+          break
+        fi
+        N=$((N * 2))  # Multiply N by 2 for the next iteration
+      done      
+      N=$((N * 10))  # Multiply N by 10 for the next iteration
+    done
+  done
+done
