@@ -19,6 +19,9 @@ int main(int argc, char *argv[]) {
     MIO_TIPO *x, *xloc, tmp, sum, sum_parz, sum_tmp;  
     // Dichiarazione dei tipi per le strategie 2 e 3
     int log2nproc, partner, send_tag, recv_tag;
+    // Dichiarazione delle variabili per i tempi
+    double t0, t1, time; /* Servono a tutti i processi */
+    double timetot;      /* Serve solo a P0 */
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &menum);
@@ -28,6 +31,7 @@ int main(int argc, char *argv[]) {
         // Controllo se ci sono abbastanza argomenti
         if (argc != 3) {
             fprintf(stderr, "Usage: %s n strategy\n", argv[0]);
+            fprintf(stderr, "Please provide both 'n' and 'strategy' as command line arguments.\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
             return 1;
         }
@@ -47,7 +51,6 @@ int main(int argc, char *argv[]) {
         for (i = 0; i < n; i++) {
             x[i] = (MIO_TIPO)1.0;  // Inizializza con valori float (cambia se necessario)
         }
-
     }
 
     if (strategy == 2 || strategy == 3) {
@@ -82,6 +85,10 @@ int main(int argc, char *argv[]) {
         MPI_Recv(xloc, nloc, MIO_TIPO_MPI, 0, tag, MPI_COMM_WORLD, &status);  // Utilizzo del tipo personalizzato MPI
     }
 
+    // Inizia il calcolo dei tempi
+    MPI_Barrier(MPI_COMM_WORLD);
+    t0=MPI_Wtime();
+    
     sum = 0;
 
     // Scegli la strategia in base a n e strategy
@@ -162,9 +169,15 @@ int main(int argc, char *argv[]) {
         // printf("\nSono il processo %d: Somma totale=%f\n", menum, sum);  // Utilizzo del tipo personalizzato per stampare
     }
 
+    t1=MPI_Wtime();
+    time=t1-t0; /*ora ogni processore conosce il proprio tempo*/
+    // printf("Sono %d: Tempo impiegato: %e secondi\n", menum, time); 
+
+    MPI_Reduce(&time,&timetot,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+
     // il processo p0 stampa il suo risultato:
     if (menum == 0) {
-        printf("\nSono il processo %d: Somma totale=%lf\n", menum, sum);  // Utilizzo del tipo personalizzato per stampare
+        printf("\nSono il processo %d: Somma totale=%lf in tempo %e secondi\n", menum, sum, timetot);  // Utilizzo del tipo personalizzato per stampare
     }
 
     // Dealloca le allocazioni dinamiche della memoria

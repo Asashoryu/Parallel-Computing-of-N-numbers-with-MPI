@@ -16,12 +16,13 @@ N=100
 
 # Some information about the job can be placed here
 # Calculate the number of CPUs
-MAXCPU=$(wc -l < $PBS_NODEFILE)
+sort -u $PBS_NODEFILE > hostlist
+NCPU=$(wc -l < hostlist)
 
 echo "---------------------------"
-echo "This job is allocated on $MAXCPU CPU(s)."
+echo "This job is allocated on $NCPU CPU(s)."
 echo "Job is running on node(s):"
-cat $PBS_NODEFILE
+cat hostlist
 
 PBS_O_WORKDIR=$PBS_O_HOME/Progetto1
 echo "----------------------"
@@ -50,17 +51,13 @@ for STRATEGY in "${STRATEGY_VALUES[@]}"; do
         continue
       fi
     fi
-    while true; do
+    # Cycle until Max number of integer is reached
+    while [ $N -lt 2147483647 ]; do
       N_tmp=$((N * 16))
       while [ $N -le $N_tmp ]; do
         echo "Executing $PBS_O_WORKDIR/progetto1 with STRATEGY=$STRATEGY, P=$P, N=$N"
-        # Establish the number of processes 
-        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $P $PBS_O_WORKDIR/progetto1 $N $STRATEGY
-        result=$?
-        if [ $result -ne 0 ]; then
-          echo "Program finished for STRATEGY=$STRATEGY, P=$P, N=$N. Exiting the loop."
-          break
-        fi
+        # Running the C executable  
+        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $P $PBS_O_WORKDIR/progetto1 $N $STRATEGY
         N=$((N * 2))  # Multiply N by 2 for the next iteration
       done      
       N=$((N * 10))  # Multiply N by 10 for the next iteration
