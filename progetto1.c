@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &menum);
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
-
+ 
     if (menum == 0) {
         // Controllo se ci sono abbastanza argomenti
         if (argc != 3) {

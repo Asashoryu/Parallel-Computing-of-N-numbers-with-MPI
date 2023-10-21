@@ -1,74 +1,82 @@
 #!/bin/bash
+
+# PBS directives
 #PBS -q studenti
+#PBS -l nodes=8:ppn=8
 #PBS -N progetto1_pbs
-#PBS -l nodes=8
 #PBS -o progetto1_pbs.out
 #PBS -e progetto1_pbs.err
-###############################
-# -q coda su cui va eseguito il job #
-# -l numbero di nodi richiest #
-# -N nome job(stesso del file pbs) #
-# -o, -e nome files contenenti l'output #
-##############################
-# qualche informazione sul job #
-##############################
 
-# Verifica se la variabile STRATEGY è definita e ha un valore valido
+# Verify if the STRATEGY variable is defined
 if [ -z "$STRATEGY" ]; then
-  echo "Errore: La variabile STRATEGY non è definita."
+  echo "Error: The STRATEGY variable is not defined."
   exit 1
 fi
 
-if ! [[ "$STRATEGY" =~ ^[1-3]$ ]]; then
-  echo "Errore: La variabile STRATEGY deve essere uno dei valori 1, 2 o 3."
-  exit 1
-fi
-
-# Verifica se le variabili P, N, STRATEGY sono definite e hanno valori validi
+# Verify if the P and N variables are defined and have valid values
 if [ -z "$P" ]; then
-  echo "Errore: La variabile P non è definita."
+  echo "Error: The P variable is not defined."
   exit 1
 fi
 
 if [ -z "$N" ]; then
-  echo "Errore: La variabile N non è definita."
+  echo "Error: The N variable is not defined."
   exit 1
 fi
 
 if ! [[ "$P" =~ ^[0-9]+$ ]]; then
-  echo "Errore: La variabile P deve essere un numero intero positivo."
+  echo "Error: The P variable must be a positive integer."
   exit 1
 fi
 
 if ! [[ "$N" =~ ^[0-9]+$ ]]; then
-  echo "Errore: La variabile N deve essere un numero intero positivo."
+  echo "Error: The N variable must be a positive integer."
   exit 1
 fi
 
-# Compila ed esegui il programma C
-NCPU=$(wc -l < $PBS_NODEFILE)
-echo ---------------------------
-echo 'Questo job e allocato su '${NCPU}' cpu(s)'
-echo 'Job sta runnando sul nodo(/nodi):'
+# Check if STRATEGY is valid (1, 2, or 3)
+if ! [[ "$STRATEGY" =~ ^[1-3]$ ]]; then
+  echo "Error: The STRATEGY variable must be one of the values 1, 2, or 3."
+  exit 1
+fi
+
+# Check if P is 1 or a multiple of 2 only when STRATEGY is 2 or 3
+if [[ "$STRATEGY" == "2" || "$STRATEGY" == "3" ]]; then
+  if [[ $P -ne 1 && $(($P % 2)) -ne 0 ]]; then
+    echo "Error: The P variable must be 1 or a multiple of 2 when STRATEGY is 2 or 3."
+    exit 1
+  fi
+fi
+
+# Some information about the job can be placed here
+# Calculate the number of CPUs
+MAXCPU=$(wc -l < $PBS_NODEFILE)
+
+echo "---------------------------"
+echo "This job is allocated on $MAXCPU CPU(s)."
+echo "Job is running on node(s):"
 cat $PBS_NODEFILE
 
 PBS_O_WORKDIR=$PBS_O_HOME/Progetto1
-echo ----------------------
-echo PBS: qsub sta runnando su $PBS_O_HOST
-echo PBS: queue originante e $PBS_O_QUEUE
-echo PBS: queue eseguente e $PBS_QUEUE
-echo PBS: working directory is $PBS_O_WORKDIR
-echo PBS: execution Mmode is $PBS_ENVIRONMENT
-echo PBS: job identifier is $PBS_JOBID
-echo PBS: job name is $PBS_JOBNAME
-echo PBS: node file is $PBS_NODEFILE
-echo PBS: current home directory is $PBS_O_HOME
-echo PBS: PATH = $PBS_O_PATH
-echo ----------------------
+echo "----------------------"
+echo "PBS: qsub is running on $PBS_O_HOST"
+echo "PBS: originating queue is $PBS_O_QUEUE"
+echo "PBS: executing queue is $PBS_QUEUE"
+echo "PBS: working directory is $PBS_O_WORKDIR"
+echo "PBS: execution mode is $PBS_ENVIRONMENT"
+echo "PBS: job identifier is $PBS_JOBID"
+echo "PBS: job name is $PBS_JOBNAME"
+echo "PBS: node file is $PBS_NODEFILE"
+echo "PBS: current home directory is $PBS_O_HOME"
+echo "PBS: PATH = $PBS_O_PATH"
+echo "----------------------"
 
-echo "Eseguo/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1_pbs $PBS_O_WORKDIR/progetto1.c"
+# Compile and execute the C program
+echo "Compiling $PBS_O_WORKDIR/progetto1.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1 $PBS_O_WORKDIR/progetto1.c
-echo "Eseguo/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $NCPU $PBS_O_WORKDIR/progetto1"
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $P $PBS_O_WORKDIR/progetto1 2 $N $STRATEGY
-echo "Programma finito!"
 
+# Establish the number of processes 
+echo "Executing $PBS_O_WORKDIR/progetto1"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $P $PBS_O_WORKDIR/progetto1 $N $STRATEGY
+
+echo "Program finished!"
