@@ -28,30 +28,47 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
 
     if (menum == 0) {
-        // Controllo se ci sono abbastanza argomenti
-        if (argc != 3) {
-            fprintf(stderr, "Usage: %s n strategy\n", argv[0]);
-            fprintf(stderr, "Please provide both 'n' and 'strategy' as command line arguments.\n");
+        if (argc < 2) {
+            fprintf(stderr, "Usage: %s n [strategy]\n", argv[0]);
+            fprintf(stderr, "Please provide the value of 'n'. You can also specify an optional 'strategy' argument (0, 1, 2, or 3).\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
             return 1;
         }
 
-        // Converti gli argomenti in interi
         n = atoi(argv[1]);
-        strategy = atoi(argv[2]);
 
-        if (strategy != 1 && strategy != 2 && strategy != 3) {
-            fprintf(stderr, "Invalid strategy: %d\n", strategy);
+        if (argc >= 3) {
+            strategy = atoi(argv[2]);
+            if (strategy != 0 && strategy != 1 && strategy != 2 && strategy != 3) {
+                fprintf(stderr, "Invalid strategy: %d\n", strategy);
+                MPI_Abort(MPI_COMM_WORLD, 1);
+                return 1;
+            }
+        } else {
+            // Se non viene specificata una strategia, imposta il valore predefinito a 0
+            strategy = 0;
+        }
+
+        // Verifica se la strategia è 2 o 3 e se N non è 1 o una potenza di 2 
+        if ((strategy == 2 || strategy == 3) && ((n & (n - 1)) != 0 && n != 1)) {
+            fprintf(stderr, "Strategy %d requires N to be a power of 2 or 1. Automatically switching to strategy 1.\n", strategy);
+            strategy = 1;
+        }
+
+        // Allocazione di memoria per l'array x
+        x = (MIO_TIPO *)malloc(n * sizeof(MIO_TIPO));
+
+        if (x == NULL) {
+            fprintf(stderr, "Memory allocation of array x failed.\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
             return 1;
         }
 
-        // Dichiarazione e inizializzazione di x in base al tipo personalizzato
-        x = (MIO_TIPO *)malloc(n * sizeof(MIO_TIPO));
         for (i = 0; i < n; i++) {
             x[i] = (MIO_TIPO)1.0;  // Inizializza con valori float (cambia se necessario)
         }
     }
+
 
     if (strategy == 2 || strategy == 3) {
         log2nproc = (int)(log(nproc) / log(2));
@@ -78,11 +95,11 @@ int main(int argc, char *argv[]) {
             if (i == rest) {
                 tmp = nloc - 1;  // Modifica tmp se i == rest
             }
-            MPI_Send(&x[start], tmp, MIO_TIPO_MPI, i, tag, MPI_COMM_WORLD);  // Utilizzo del tipo personalizzato MPI
+            MPI_Send(&x[start], tmp, MIO_TIPO_MPI, i, tag, MPI_COMM_WORLD);
         }
     } else {
         tag = 22 + menum;
-        MPI_Recv(xloc, nloc, MIO_TIPO_MPI, 0, tag, MPI_COMM_WORLD, &status);  // Utilizzo del tipo personalizzato MPI
+        MPI_Recv(xloc, nloc, MIO_TIPO_MPI, 0, tag, MPI_COMM_WORLD, &status);
     }
 
     // Inizia il calcolo dei tempi
@@ -91,16 +108,23 @@ int main(int argc, char *argv[]) {
     
     sum = 0;
 
-    // Scegli la strategia in base a n e strategy
-    if (strategy == 1) {
-        // Utilizza la strategia 1
+    // utilizza la strategia 0, ovvero il calcolo della somma in modo sequenziale
+    if (strategy == 0) {
+        if (menum == 0) {
+            for (i = 0; i < n; i++) {
+                sum += x[i];
+            }
+        }
+    }
+    // Utilizza la strategia 1
+    else if (strategy == 1) {
         if (menum == 0) {
             for (i = 0; i < nloc; i++) {
                 sum += x[i];
             }
             for (i = 1; i < nproc; i++) {
                 tag = 80 + i;
-                MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, i, tag, MPI_COMM_WORLD, &status);  // Utilizzo del tipo personalizzato MPI
+                MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, i, tag, MPI_COMM_WORLD, &status);
                 sum += sum_parz;
             }
             // printf("La somma totale è %f\n", sum);  // Utilizzo del tipo personalizzato per stampare
@@ -109,10 +133,10 @@ int main(int argc, char *argv[]) {
                 sum += xloc[i];
             }
             tag = menum + 80;
-            MPI_Send(&sum, 1, MIO_TIPO_MPI, 0, tag, MPI_COMM_WORLD);  // Utilizzo del tipo personalizzato MPI
+            MPI_Send(&sum, 1, MIO_TIPO_MPI, 0, tag, MPI_COMM_WORLD);
         }
+    // Utilizza la strategia 2
     } else if (strategy == 2) {
-        // Utilizza la strategia 2
         for (i = 0; i < nloc; i++) {
             sum += xloc[i];
         }
@@ -124,21 +148,21 @@ int main(int argc, char *argv[]) {
                     partner = menum + (1 << i);
                     if (partner < nproc) {
                         recv_tag = 300 + partner;
-                        MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, partner, recv_tag, MPI_COMM_WORLD, &status);  // Utilizzo del tipo personalizzato MPI
+                        MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, partner, recv_tag, MPI_COMM_WORLD, &status);
                         sum += sum_parz;
                     }
                 } else {
                     // Chi spedisce
                     partner = menum - (1 << i);
                     send_tag = 300 + menum;
-                    MPI_Send(&sum, 1, MIO_TIPO_MPI, partner, send_tag, MPI_COMM_WORLD);  // Utilizzo del tipo personalizzato MPI
+                    MPI_Send(&sum, 1, MIO_TIPO_MPI, partner, send_tag, MPI_COMM_WORLD);
                 }
             }
         }
         // Al termine dell'elaborazione, puoi stampare il risultato
         // printf("\nSono il processo %d: Somma totale=%f\n", menum, sum);  // Utilizzo del tipo personalizzato per stampare
+    // Utilizza la strategia 3
     } else if(strategy == 3) {
-        // Utilizza la strategia 3
         for (i = 0; i < nloc; i++) {
             sum += xloc[i];
         }
@@ -148,21 +172,21 @@ int main(int argc, char *argv[]) {
                 partner = menum + (1 << i);
                 // Spedisci a menum + 2^i
                 send_tag = 300 + menum;
-                MPI_Send(&sum, 1, MIO_TIPO_MPI, partner, send_tag, MPI_COMM_WORLD);  // Utilizzo del tipo personalizzato MPI
+                MPI_Send(&sum, 1, MIO_TIPO_MPI, partner, send_tag, MPI_COMM_WORLD);
                 // Ricevi da menum + 2^i
                 recv_tag = 300 + partner;
-                MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, partner, recv_tag, MPI_COMM_WORLD, &status);  // Utilizzo del tipo personalizzato MPI
+                MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, partner, recv_tag, MPI_COMM_WORLD, &status);
                 sum += sum_parz;
             } else {
                 partner = menum - (1 << i);
                 sum_tmp = sum;
                 // Ricevi da menum - 2^i
                 recv_tag = 300 + partner;
-                MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, partner, recv_tag, MPI_COMM_WORLD, &status);  // Utilizzo del tipo personalizzato MPI
+                MPI_Recv(&sum_parz, 1, MIO_TIPO_MPI, partner, recv_tag, MPI_COMM_WORLD, &status);
                 sum += sum_parz;
                 // Spedisci a menum - 2^i
                 send_tag = 300 + menum;
-                MPI_Send(&sum_tmp, 1, MIO_TIPO_MPI, partner, send_tag, MPI_COMM_WORLD);  // Utilizzo del tipo personalizzato MPI
+                MPI_Send(&sum_tmp, 1, MIO_TIPO_MPI, partner, send_tag, MPI_COMM_WORLD);
             }
         }
         // Al termine dell'elaborazione, puoi stampare il risultato
