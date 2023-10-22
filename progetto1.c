@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <limits.h>
+#include <time.h>
 #include "mpi.h"
 
 // Definizione dei tipi personalizzati tramite macro, fare attenzione a sostituire entrambi con tipi sensati come:
@@ -10,6 +12,8 @@
 // - Per il tipo double: #define MIO_TIPO double e #define MIO_TIPO_MPI MPI_DOUBLE
 #define MIO_TIPO int
 #define MIO_TIPO_MPI MPI_INT
+
+void initializeNumbers(int n, MIO_TIPO *x, int menum);
 
 int main(int argc, char *argv[]) {
     int menum, nproc, strategy;
@@ -37,6 +41,12 @@ int main(int argc, char *argv[]) {
 
         n = atoi(argv[1]);
 
+        if (n <= 0 || n > INT_MAX) {
+            fprintf(stderr, "Invalid value of 'n'. Please provide a positive integer within the range of representable integers.\n");
+            MPI_Abort(MPI_COMM_WORLD, 1);
+            return 1;
+        }
+
         if (argc >= 3) {
             strategy = atoi(argv[2]);
             if (strategy != 0 && strategy != 1 && strategy != 2 && strategy != 3) {
@@ -44,15 +54,15 @@ int main(int argc, char *argv[]) {
                 MPI_Abort(MPI_COMM_WORLD, 1);
                 return 1;
             }
+
+            // Verifica se la strategia è 2 o 3 e se N non è 1 o una potenza di 2 
+            if ((strategy == 2 || strategy == 3) && ((n & (n - 1)) != 0 && n != 1)) {
+                fprintf(stderr, "Strategy %d requires N to be a power of 2 or 1. Automatically switching to strategy 1.\n", strategy);
+                strategy = 1;
+            }
         } else {
             // Se non viene specificata una strategia, imposta il valore predefinito a 0
             strategy = 0;
-        }
-
-        // Verifica se la strategia è 2 o 3 e se N non è 1 o una potenza di 2 
-        if ((strategy == 2 || strategy == 3) && ((n & (n - 1)) != 0 && n != 1)) {
-            fprintf(stderr, "Strategy %d requires N to be a power of 2 or 1. Automatically switching to strategy 1.\n", strategy);
-            strategy = 1;
         }
 
         // Allocazione di memoria per l'array x
@@ -65,10 +75,9 @@ int main(int argc, char *argv[]) {
         }
 
         for (i = 0; i < n; i++) {
-            x[i] = (MIO_TIPO)1.0;  // Inizializza con valori float (cambia se necessario)
+            initializeNumbers(n, x, menum);
         }
     }
-
 
     if (strategy == 2 || strategy == 3) {
         log2nproc = (int)(log(nproc) / log(2));
@@ -202,7 +211,9 @@ int main(int argc, char *argv[]) {
     // il processo p0 stampa il suo risultato:
     if (menum == 0) {
         printf("\nSono il processo %d: Somma totale=%lf in tempo %e secondi\n", menum, sum, timetot);  // Utilizzo del tipo personalizzato per stampare
+        saveResultsToCSV(n, nproc, strategy, timetot);
     }
+
 
     // Dealloca le allocazioni dinamiche della memoria
     free(xloc);
@@ -212,5 +223,48 @@ int main(int argc, char *argv[]) {
 
     MPI_Finalize();
     return 0;
+}
+
+void initializeNumbers(int n, MIO_TIPO *x, int menum) {
+    if (menum == 0) {
+        if (n <= 20) {
+            FILE *file = fopen("numbers.txt", "r");
+            if (file == NULL) {
+                fprintf(stderr, "Error opening file: numbers.txt\n");
+                MPI_Abort(MPI_COMM_WORLD, 1);
+                return;
+            }
+
+            for (int i = 0; i < n; i++) {
+                if (fscanf(file, "%d", &x[i]) != 1) {
+                    fprintf(stderr, "Error reading numbers from file: numbers.txt\n");
+                    fclose(file);
+                    MPI_Abort(MPI_COMM_WORLD, 1);
+                    return;
+                }
+            }
+            fclose(file);
+        } else {
+            // Genera numeri casuali per n maggiore di 20
+            srand((unsigned int)time(NULL));
+            for (int i = 0; i < n; i++) {
+                x[i] = rand() % 100;  // range regolabile
+            }
+        }
+    }
+}
+
+// Funzione per salvare i risultati dell'elaborazione in un file CSV
+void saveResultsToCSV(int n, int p, int strategy, double time) {
+    FILE *file = fopen("results.csv", "a"); // Apri il file CSV in modalità append
+    if (file == NULL) {
+        printf("Errore nell'apertura del file.\n");
+        exit(1);
+    }
+
+    // Scrivi i dati in formato CSV
+    fprintf(file, "%d,%d,%d,%.6f\n", n, p, strategy, time);
+
+    fclose(file); // Chiudi il file
 }
 
