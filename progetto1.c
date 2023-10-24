@@ -10,17 +10,18 @@
 // - Per il tipo int:    #define MIO_TIPO int e    #define MIO_TIPO_MPI MPI_INT
 // - Per il tipo float:  #define MIO_TIPO float e  #define MIO_TIPO_MPI MPI_FLOAT
 // - Per il tipo double: #define MIO_TIPO double e #define MIO_TIPO_MPI MPI_DOUBLE
-#define MIO_TIPO int
-#define MIO_TIPO_MPI MPI_INT
+#define MIO_TIPO double
+#define MIO_TIPO_MPI MPI_DOUBLE
 
 void initializeNumbers(int n, MIO_TIPO *x, int menum);
+void saveResultsToCSV(int n, int p, int strategy, double time);
 
 int main(int argc, char *argv[]) {
     int menum, nproc, strategy;
-    int n, nloc, tag, i;
+    int n, nloc, tag, i, tmp;
     MPI_Status status;
     // Dichiarazione delle variabili con tipi personalizzati
-    MIO_TIPO *x, *xloc, tmp, sum, sum_parz, sum_tmp;  
+    MIO_TIPO *x = NULL, *xloc = NULL, sum, sum_parz, sum_tmp;  
     // Dichiarazione dei tipi per le strategie 2 e 3
     int log2nproc, partner, send_tag, recv_tag;
     // Dichiarazione delle variabili per i tempi
@@ -55,9 +56,9 @@ int main(int argc, char *argv[]) {
                 return 1;
             }
 
-            // Verifica se la strategia è 2 o 3 e se N non è 1 o una potenza di 2 
-            if ((strategy == 2 || strategy == 3) && ((n & (n - 1)) != 0 && n != 1)) {
-                fprintf(stderr, "Strategy %d requires N to be a power of 2 or 1. Automatically switching to strategy 1.\n", strategy);
+            // Verifica se la strategia è 2 o 3 e se P non è 1 o una potenza di 2 
+            if ((strategy == 2 || strategy == 3) && ((nproc & (nproc - 1)) != 0 && nproc != 1)) {
+                fprintf(stderr, "Strategy %d requires P to be a power of 2 or 1. Automatically switching to strategy 1.\n", strategy);
                 strategy = 1;
             }
         } else {
@@ -74,18 +75,16 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        for (i = 0; i < n; i++) {
-            initializeNumbers(n, x, menum);
-        }
-    }
-
-    if (strategy == 2 || strategy == 3) {
-        log2nproc = (int)(log(nproc) / log(2));
+        initializeNumbers(n, x, menum);
     }
 
     // Distribuzione di n e strategy a tutti i processi
     MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD);  // Tipo MPI int
     MPI_Bcast(&strategy, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    if (strategy == 2 || strategy == 3) {
+        log2nproc = (int)(log(nproc) / log(2));
+    }
 
     nloc = n / nproc;
     int rest = n % nproc;
@@ -93,8 +92,14 @@ int main(int argc, char *argv[]) {
         nloc = nloc + 1;
     }
     xloc = (MIO_TIPO *)malloc(nloc * sizeof(MIO_TIPO));
+    if (xloc == NULL) {
+        fprintf(stderr, "Memory allocation of array xloc failed.\n");
+        MPI_Abort(MPI_COMM_WORLD, 1);
+        return 1;
+    }
 
     if (menum == 0) {
+        free(xloc);
         xloc = x;
         tmp = nloc;
         int start = 0;
@@ -205,27 +210,31 @@ int main(int argc, char *argv[]) {
     t1=MPI_Wtime();
     time=t1-t0; /*ora ogni processore conosce il proprio tempo*/
     // printf("Sono %d: Tempo impiegato: %e secondi\n", menum, time); 
-
+    MPI_Barrier(MPI_COMM_WORLD);
     MPI_Reduce(&time,&timetot,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 
     // il processo p0 stampa il suo risultato:
     if (menum == 0) {
-        printf("\nSono il processo %d: Somma totale=%lf in tempo %e secondi\n", menum, sum, timetot);  // Utilizzo del tipo personalizzato per stampare
+        printf("\nSono il processo %d: Somma totale=%lf in tempo %e secondi\n", menum, (double)sum, timetot);  // Utilizzo del tipo personalizzato per stampare
         saveResultsToCSV(n, nproc, strategy, timetot);
     }
 
 
-    // Dealloca le allocazioni dinamiche della memoria
+    // Dealloca le allocazioni dinamiche della memoria 
+    /*
     free(xloc);
     if (menum == 0) {
         free(x);
     }
+    */
 
     MPI_Finalize();
     return 0;
 }
 
+// Modifica la funzione initializeNumbers
 void initializeNumbers(int n, MIO_TIPO *x, int menum) {
+    int i;
     if (menum == 0) {
         if (n <= 20) {
             FILE *file = fopen("numbers.txt", "r");
@@ -234,8 +243,7 @@ void initializeNumbers(int n, MIO_TIPO *x, int menum) {
                 MPI_Abort(MPI_COMM_WORLD, 1);
                 return;
             }
-
-            for (int i = 0; i < n; i++) {
+            for (i = 0; i < n; i++) {
                 if (fscanf(file, "%d", &x[i]) != 1) {
                     fprintf(stderr, "Error reading numbers from file: numbers.txt\n");
                     fclose(file);
@@ -247,14 +255,15 @@ void initializeNumbers(int n, MIO_TIPO *x, int menum) {
         } else {
             // Genera numeri casuali per n maggiore di 20
             srand((unsigned int)time(NULL));
-            for (int i = 0; i < n; i++) {
+            for (i = 0; i < n; i++) {
                 x[i] = rand() % 100;  // range regolabile
+                //x[i] = 1;
             }
         }
     }
 }
 
-// Funzione per salvare i risultati dell'elaborazione in un file CSV
+// Modifica la funzione saveResultsToCSV
 void saveResultsToCSV(int n, int p, int strategy, double time) {
     FILE *file = fopen("results.csv", "a"); // Apri il file CSV in modalità append
     if (file == NULL) {
@@ -263,8 +272,10 @@ void saveResultsToCSV(int n, int p, int strategy, double time) {
     }
 
     // Scrivi i dati in formato CSV
-    fprintf(file, "%d,%d,%d,%.6f\n", n, p, strategy, time);
+    fprintf(file, "%d,%d,%d,%e\n", n, p, strategy, time);
 
     fclose(file); // Chiudi il file
 }
+
+
 

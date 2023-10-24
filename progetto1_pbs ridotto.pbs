@@ -1,17 +1,17 @@
 #!/bin/bash
 
+# Questo PBS accetta STRATEGY e P come parametri
 # PBS directives
 #PBS -q studenti
-#PBS -l nodes=8:ppn=8
-#PBS -N progetto1_pbs
-#PBS -o progetto1_pbs.out
-#PBS -e progetto1_pbs.err
+#PBS -l nodes=${P}:ppn=8
+#PBS -N progetto1_pbs_ridotto
+#PBS -o progetto1_pbs_${STRATEGY}_${P}.out
+#PBS -e progetto1_pbs_${STRATEGY}_${P}.err
 
 # Ottieni l'orario corrente in secondi
 # current_time=$(date -u +%s)
 
 # Specifica i nomi dei file con l'orario in secondi nei PBS directives
-
 
 # Some information about the job can be placed here
 # Calculate the number of CPUs
@@ -37,44 +37,26 @@ echo "PBS: current home directory is $PBS_O_HOME"
 echo "PBS: PATH = $PBS_O_PATH"
 echo "----------------------"
 
-# List of values to test for P and STRATEGY
-P_VALUES=(1 2 3 4 5 6 7 8)
-STRATEGY_VALUES=(0 1 2 3)
-
 # Initialize N value
 
 # Compile the C program
 echo "Compiling $PBS_O_WORKDIR/progetto1.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1 $PBS_O_WORKDIR/progetto1.c
 
-# Loop over STRATEGY and P values
-for STRATEGY in "${STRATEGY_VALUES[@]}"; do
-  for P in "${P_VALUES[@]}"; do
-    # Check if P is 1 or a power of 2 when STRATEGY is 2 or 3
-    if [[ "$STRATEGY" == "2" || "$STRATEGY" == "3" ]]; then
-      if [[ $P -ne 1 && $((P & (P - 1))) -ne 0 ]]; then
-        continue
-      fi
-    fi
-    # Check if P > 1 and STRATEGY is 0, then break the P loop
-    if [[ "$STRATEGY" == "0" && $P -gt 1 ]]; then
-      break  # Exit the P loop
-    fi
-    N=100 
-    # Cycle until Max number of integer is reached
-    while [ $N -lt 100000000 ]; do
-      N_tmp=$N
-      N_tmp_max=$((N * 16))
-      while [ $N_tmp -le $N_tmp_max ]; do
-        echo "Executing 10 times $PBS_O_WORKDIR/progetto1 with STRATEGY=$STRATEGY, P=$P, N=$N_tmp"
-        for ((i = 1; i <= 10; i++)); do
-          /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $P $PBS_O_WORKDIR/progetto1 $N_tmp $STRATEGY
-        done
-        N_tmp=$((N_tmp * 2))  # Multiply N by 2 for the next iteration
-      done
-      N=$((N * 10))  # Multiply N by 10 for the next iteration
+
+N=100 
+# Cycle until Max number of integer is reached
+while [ $N -lt 100000000 ]; do
+  N_tmp=$N
+  N_tmp_max=$((N * 16))
+  while [ $N_tmp -le $N_tmp_max ]; do
+    echo "Executing 10 times $PBS_O_WORKDIR/progetto1 with STRATEGY=$STRATEGY, P=$P, N=$N_tmp"
+    for ((i = 1; i <= 10; i++)); do
+      /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $P $PBS_O_WORKDIR/progetto1 $N_tmp $STRATEGY
     done
+    N_tmp=$((N_tmp * 2))  # Multiply N by 2 for the next iteration
   done
+  N=$((N * 10))  # Multiply N by 10 for the next iteration
 done
 
 : <<'END'
