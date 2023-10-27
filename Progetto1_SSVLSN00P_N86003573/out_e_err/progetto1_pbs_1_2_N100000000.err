@@ -1,0 +1,36 @@
+[[12628,1],1][btl_openib_component.c:2951:handle_wc] from wn274.scope.unina.it to: wn273 error polling LP CQ with status LOCAL LENGTH ERROR status number 1 for wr_id 490376480 opcode 128  vendor error 105 qp_idx 3
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 1 with PID 28009 on
+node wn274.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------
+[[12633,1],1][btl_openib_component.c:2951:handle_wc] from wn274.scope.unina.it to: wn273 error polling LP CQ with status LOCAL LENGTH ERROR status number 1 for wr_id 286985504 opcode 128  vendor error 105 qp_idx 3
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 1 with PID 28041 on
+node wn274.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------
+[[12638,1],1][btl_openib_component.c:2951:handle_wc] from wn274.scope.unina.it to: wn273 error polling LP CQ with status LOCAL LENGTH ERROR status number 1 for wr_id 52170016 opcode 128  vendor error 105 qp_idx 3
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 1 with PID 28073 on
+node wn274.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------
+[[12707,1],1][btl_openib_component.c:2951:handle_wc] from wn274.scope.unina.it to: wn273 error polling LP CQ with status LOCAL LENGTH ERROR status number 1 for wr_id 45268256 opcode 128  vendor error 105 qp_idx 3
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 1 with PID 28105 on
+node wn274.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------
+=>> PBS: job killed: walltime 313 exceeded limit 300
+mpiexec: killing job...
+
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 0 with PID 869 on node wn273.scope.unina.it exited on signal 0 (Unknown signal 0).
+--------------------------------------------------------------------------
+mpiexec: clean termination accomplished
+

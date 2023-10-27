@@ -1,0 +1,26 @@
+--------------------------------------------------------------------------
+mpiexec was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1
+Node: wn274.scope.unina.it
+
+while attempting to start process rank 1.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1
+Node: wn274.scope.unina.it
+
+while attempting to start process rank 1.
+--------------------------------------------------------------------------
+=>> PBS: job killed: walltime 341 exceeded limit 300
+mpiexec: killing job...
+
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 1 with PID 30413 on node wn274.scope.unina.it exited on signal 0 (Unknown signal 0).
+--------------------------------------------------------------------------
+mpiexec: clean termination accomplished
+

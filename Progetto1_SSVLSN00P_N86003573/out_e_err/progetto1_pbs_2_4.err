@@ -1,0 +1,8 @@
+=>> PBS: job killed: walltime 333 exceeded limit 300
+mpiexec: killing job...
+
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 1 with PID 12079 on node wn274.scope.unina.it exited on signal 0 (Unknown signal 0).
+--------------------------------------------------------------------------
+mpiexec: clean termination accomplished
+

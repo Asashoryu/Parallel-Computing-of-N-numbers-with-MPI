@@ -5,8 +5,8 @@
 #PBS -q studenti
 #PBS -l nodes=8:ppn=8
 #PBS -N progetto1_pbs_ridotto
-#PBS -o progetto1_pbs_${STRATEGY}_${P}.out
-#PBS -e progetto1_pbs_${STRATEGY}_${P}.err
+#PBS -o progetto1_pbs_${STRATEGY}_${P}_N100000000.out
+#PBS -e progetto1_pbs_${STRATEGY}_${P}_N100000000.err
 
 # Ottieni l'orario corrente in secondi
 # current_time=$(date -u +%s)
@@ -44,9 +44,7 @@ echo "Compiling $PBS_O_WORKDIR/progetto1.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/progetto1 $PBS_O_WORKDIR/progetto1.c
 
 
-N=100 
-# Ciclo fino a raggiungere il numero massimo di interi
-while [ $N -lt 100000000 ]; do
+N=100000000 
   N_tmp=$N
   N_tmp_max=$((N * 16))
   while [ $N_tmp -le $N_tmp_max ]; do
@@ -56,5 +54,10 @@ while [ $N -lt 100000000 ]; do
     done
     N_tmp=$((N_tmp * 2))  # Moltiplica N per 2 per la prossima iterazione
   done
-  N=$((N * 10))  # Moltiplica N per 10 per la prossima iterazione
-done
+
+
+: <<'END'
+# Running the C executable  
+echo "Running the C executable"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 8 $PBS_O_WORKDIR/progetto1 10 2
+END

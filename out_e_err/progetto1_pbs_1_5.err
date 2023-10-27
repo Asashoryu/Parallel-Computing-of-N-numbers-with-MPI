@@ -1,0 +1,8 @@
+=>> PBS: job killed: walltime 313 exceeded limit 300
+mpiexec: killing job...
+
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 2 with PID 17773 on node wn275.scope.unina.it exited on signal 0 (Unknown signal 0).
+--------------------------------------------------------------------------
+mpiexec: clean termination accomplished
+

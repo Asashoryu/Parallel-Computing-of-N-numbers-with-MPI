@@ -1,0 +1,74 @@
+---------------------------
+This job is allocated on 8 CPU(s).
+Job is running on node(s):
+wn273.scope.unina.it
+wn274.scope.unina.it
+wn275.scope.unina.it
+wn276.scope.unina.it
+wn277.scope.unina.it
+wn278.scope.unina.it
+wn279.scope.unina.it
+wn280.scope.unina.it
+----------------------
+PBS: qsub is running on ui-studenti.scope.unina.it
+PBS: originating queue is studenti
+PBS: executing queue is studenti
+PBS: working directory is /homes/DMA/PDC/2024/SSVLSN00P/Progetto1
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 4015482.torque02.scope.unina.it
+PBS: job name is progetto1_pbs_ridotto
+PBS: node file is /var/spool/pbs/aux//4015482.torque02.scope.unina.it
+PBS: current home directory is /homes/DMA/PDC/2024/SSVLSN00P
+PBS: PATH = /usr/lib64/openmpi/1.2.7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/mpirt/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64_mic:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1.0.3/bin:/opt/exp_soft/unina.it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina.it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/SSVLSN00P/bin
+----------------------
+Compiling /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1.c
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=1, P=8, N=100000000
+
+Sono il processo 0: Somma totale=4950102414.000000 in tempo 5.352402e-02 secondi
+
+Sono il processo 0: Somma totale=4949795493.000000 in tempo 5.349779e-02 secondi
+
+Sono il processo 0: Somma totale=4949886071.000000 in tempo 5.345297e-02 secondi
+
+Sono il processo 0: Somma totale=4950122953.000000 in tempo 5.358291e-02 secondi
+
+Sono il processo 0: Somma totale=4950055786.000000 in tempo 5.348301e-02 secondi
+
+Sono il processo 0: Somma totale=4949504951.000000 in tempo 5.353308e-02 secondi
+
+Sono il processo 0: Somma totale=4950121643.000000 in tempo 5.380297e-02 secondi
+
+Sono il processo 0: Somma totale=4949895335.000000 in tempo 5.353713e-02 secondi
+
+Sono il processo 0: Somma totale=4949837496.000000 in tempo 5.351520e-02 secondi
+
+Sono il processo 0: Somma totale=4949362060.000000 in tempo 5.349612e-02 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=1, P=8, N=200000000
+
+Sono il processo 0: Somma totale=9900215707.000000 in tempo 1.069810e-01 secondi
+
+Sono il processo 0: Somma totale=9899997002.000000 in tempo 1.074278e-01 secondi
+
+Sono il processo 0: Somma totale=9899987889.000000 in tempo 1.068821e-01 secondi
+
+Sono il processo 0: Somma totale=9899962148.000000 in tempo 1.069090e-01 secondi
+
+Sono il processo 0: Somma totale=9900851233.000000 in tempo 1.068962e-01 secondi
+
+Sono il processo 0: Somma totale=9900536481.000000 in tempo 1.069400e-01 secondi
+
+Sono il processo 0: Somma totale=9899349337.000000 in tempo 1.073570e-01 secondi
+
+Sono il processo 0: Somma totale=9900280335.000000 in tempo 1.069770e-01 secondi
+
+Sono il processo 0: Somma totale=9899755653.000000 in tempo 1.072412e-01 secondi
+
+Sono il processo 0: Somma totale=9899979507.000000 in tempo 1.069729e-01 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=1, P=8, N=400000000
+
+Sono il processo 0: Somma totale=19800542618.000000 in tempo 2.136631e-01 secondi
+
+Sono il processo 0: Somma totale=19800042519.000000 in tempo 2.138429e-01 secondi
+
+Sono il processo 0: Somma totale=19798922942.000000 in tempo 2.137120e-01 secondi
+8 total processes killed (some possibly by mpiexec during cleanup)

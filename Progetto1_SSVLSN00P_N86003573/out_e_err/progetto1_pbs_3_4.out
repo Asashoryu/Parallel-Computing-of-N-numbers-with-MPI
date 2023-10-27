@@ -1,0 +1,647 @@
+---------------------------
+This job is allocated on 8 CPU(s).
+Job is running on node(s):
+wn273.scope.unina.it
+wn274.scope.unina.it
+wn275.scope.unina.it
+wn276.scope.unina.it
+wn277.scope.unina.it
+wn278.scope.unina.it
+wn279.scope.unina.it
+wn280.scope.unina.it
+----------------------
+PBS: qsub is running on ui-studenti.scope.unina.it
+PBS: originating queue is studenti
+PBS: executing queue is studenti
+PBS: working directory is /homes/DMA/PDC/2024/SSVLSN00P/Progetto1
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 4015380.torque02.scope.unina.it
+PBS: job name is progetto1_pbs_ridotto
+PBS: node file is /var/spool/pbs/aux//4015380.torque02.scope.unina.it
+PBS: current home directory is /homes/DMA/PDC/2024/SSVLSN00P
+PBS: PATH = /usr/lib64/openmpi/1.2.7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/mpirt/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64_mic:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1.0.3/bin:/opt/exp_soft/unina.it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina.it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/SSVLSN00P/bin
+----------------------
+Compiling /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1.c
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=100
+
+Sono il processo 0: Somma totale=5233.000000 in tempo 3.695488e-05 secondi
+
+Sono il processo 0: Somma totale=5012.000000 in tempo 3.409386e-05 secondi
+
+Sono il processo 0: Somma totale=5012.000000 in tempo 3.480911e-05 secondi
+
+Sono il processo 0: Somma totale=5012.000000 in tempo 3.004074e-05 secondi
+
+Sono il processo 0: Somma totale=4968.000000 in tempo 3.385544e-05 secondi
+
+Sono il processo 0: Somma totale=4968.000000 in tempo 3.290176e-05 secondi
+
+Sono il processo 0: Somma totale=5184.000000 in tempo 3.099442e-05 secondi
+
+Sono il processo 0: Somma totale=5184.000000 in tempo 4.792213e-05 secondi
+
+Sono il processo 0: Somma totale=4829.000000 in tempo 5.078316e-05 secondi
+
+Sono il processo 0: Somma totale=4829.000000 in tempo 4.577637e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=200
+
+Sono il processo 0: Somma totale=9792.000000 in tempo 3.194809e-05 secondi
+
+Sono il processo 0: Somma totale=9792.000000 in tempo 3.099442e-05 secondi
+
+Sono il processo 0: Somma totale=9835.000000 in tempo 3.099442e-05 secondi
+
+Sono il processo 0: Somma totale=9835.000000 in tempo 3.480911e-05 secondi
+
+Sono il processo 0: Somma totale=10506.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=10506.000000 in tempo 3.099442e-05 secondi
+
+Sono il processo 0: Somma totale=10253.000000 in tempo 3.790855e-05 secondi
+
+Sono il processo 0: Somma totale=10253.000000 in tempo 4.601479e-05 secondi
+
+Sono il processo 0: Somma totale=9668.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=9668.000000 in tempo 5.006790e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=400
+
+Sono il processo 0: Somma totale=19076.000000 in tempo 4.696846e-05 secondi
+
+Sono il processo 0: Somma totale=19076.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=19380.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=19380.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=20083.000000 in tempo 3.314018e-05 secondi
+
+Sono il processo 0: Somma totale=20083.000000 in tempo 4.816055e-05 secondi
+
+Sono il processo 0: Somma totale=19493.000000 in tempo 3.218651e-05 secondi
+
+Sono il processo 0: Somma totale=19493.000000 in tempo 3.695488e-05 secondi
+
+Sono il processo 0: Somma totale=19900.000000 in tempo 3.314018e-05 secondi
+
+Sono il processo 0: Somma totale=19900.000000 in tempo 4.887581e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=800
+
+Sono il processo 0: Somma totale=40282.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=40025.000000 in tempo 5.006790e-05 secondi
+
+Sono il processo 0: Somma totale=40025.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=40475.000000 in tempo 3.480911e-05 secondi
+
+Sono il processo 0: Somma totale=40475.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=39767.000000 in tempo 3.409386e-05 secondi
+
+Sono il processo 0: Somma totale=39767.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=41227.000000 in tempo 3.004074e-05 secondi
+
+Sono il processo 0: Somma totale=41227.000000 in tempo 3.910065e-05 secondi
+
+Sono il processo 0: Somma totale=41227.000000 in tempo 3.480911e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=1600
+
+Sono il processo 0: Somma totale=80543.000000 in tempo 3.695488e-05 secondi
+
+Sono il processo 0: Somma totale=76672.000000 in tempo 5.912781e-05 secondi
+
+Sono il processo 0: Somma totale=76672.000000 in tempo 3.910065e-05 secondi
+
+Sono il processo 0: Somma totale=80233.000000 in tempo 3.004074e-05 secondi
+
+Sono il processo 0: Somma totale=80233.000000 in tempo 3.480911e-05 secondi
+
+Sono il processo 0: Somma totale=80233.000000 in tempo 3.719330e-05 secondi
+
+Sono il processo 0: Somma totale=77933.000000 in tempo 3.194809e-05 secondi
+
+Sono il processo 0: Somma totale=77933.000000 in tempo 3.194809e-05 secondi
+
+Sono il processo 0: Somma totale=78731.000000 in tempo 3.695488e-05 secondi
+
+Sono il processo 0: Somma totale=78731.000000 in tempo 3.695488e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=1000
+
+Sono il processo 0: Somma totale=50059.000000 in tempo 2.980232e-05 secondi
+
+Sono il processo 0: Somma totale=50059.000000 in tempo 5.102158e-05 secondi
+
+Sono il processo 0: Somma totale=47116.000000 in tempo 3.719330e-05 secondi
+
+Sono il processo 0: Somma totale=47116.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=47937.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=47937.000000 in tempo 7.796288e-05 secondi
+
+Sono il processo 0: Somma totale=47937.000000 in tempo 3.695488e-05 secondi
+
+Sono il processo 0: Somma totale=50395.000000 in tempo 4.601479e-05 secondi
+
+Sono il processo 0: Somma totale=50395.000000 in tempo 2.789497e-05 secondi
+
+Sono il processo 0: Somma totale=49072.000000 in tempo 3.409386e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=2000
+
+Sono il processo 0: Somma totale=99254.000000 in tempo 5.006790e-05 secondi
+
+Sono il processo 0: Somma totale=100021.000000 in tempo 3.099442e-05 secondi
+
+Sono il processo 0: Somma totale=100021.000000 in tempo 3.099442e-05 secondi
+
+Sono il processo 0: Somma totale=99466.000000 in tempo 5.006790e-05 secondi
+
+Sono il processo 0: Somma totale=99466.000000 in tempo 4.506111e-05 secondi
+
+Sono il processo 0: Somma totale=97801.000000 in tempo 3.290176e-05 secondi
+
+Sono il processo 0: Somma totale=97801.000000 in tempo 4.386902e-05 secondi
+
+Sono il processo 0: Somma totale=97801.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=97449.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=97449.000000 in tempo 3.290176e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=4000
+
+Sono il processo 0: Somma totale=198152.000000 in tempo 5.102158e-05 secondi
+
+Sono il processo 0: Somma totale=198152.000000 in tempo 3.886223e-05 secondi
+
+Sono il processo 0: Somma totale=197686.000000 in tempo 3.886223e-05 secondi
+
+Sono il processo 0: Somma totale=197686.000000 in tempo 4.982948e-05 secondi
+
+Sono il processo 0: Somma totale=199636.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=199636.000000 in tempo 3.790855e-05 secondi
+
+Sono il processo 0: Somma totale=198517.000000 in tempo 3.504753e-05 secondi
+
+Sono il processo 0: Somma totale=198517.000000 in tempo 3.910065e-05 secondi
+
+Sono il processo 0: Somma totale=198517.000000 in tempo 6.794930e-05 secondi
+
+Sono il processo 0: Somma totale=201605.000000 in tempo 3.290176e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=8000
+
+Sono il processo 0: Somma totale=400190.000000 in tempo 4.100800e-05 secondi
+
+Sono il processo 0: Somma totale=400190.000000 in tempo 4.887581e-05 secondi
+
+Sono il processo 0: Somma totale=394740.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=394740.000000 in tempo 4.005432e-05 secondi
+
+Sono il processo 0: Somma totale=396897.000000 in tempo 5.388260e-05 secondi
+
+Sono il processo 0: Somma totale=396897.000000 in tempo 4.410744e-05 secondi
+
+Sono il processo 0: Somma totale=397626.000000 in tempo 3.600121e-05 secondi
+
+Sono il processo 0: Somma totale=397626.000000 in tempo 4.220009e-05 secondi
+
+Sono il processo 0: Somma totale=397626.000000 in tempo 3.910065e-05 secondi
+
+Sono il processo 0: Somma totale=397658.000000 in tempo 3.886223e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=16000
+
+Sono il processo 0: Somma totale=793894.000000 in tempo 5.292892e-05 secondi
+
+Sono il processo 0: Somma totale=793894.000000 in tempo 4.506111e-05 secondi
+
+Sono il processo 0: Somma totale=787600.000000 in tempo 4.792213e-05 secondi
+
+Sono il processo 0: Somma totale=787600.000000 in tempo 4.696846e-05 secondi
+
+Sono il processo 0: Somma totale=798074.000000 in tempo 5.006790e-05 secondi
+
+Sono il processo 0: Somma totale=798074.000000 in tempo 4.696846e-05 secondi
+
+Sono il processo 0: Somma totale=798074.000000 in tempo 4.696846e-05 secondi
+
+Sono il processo 0: Somma totale=793311.000000 in tempo 4.506111e-05 secondi
+
+Sono il processo 0: Somma totale=793311.000000 in tempo 4.601479e-05 secondi
+
+Sono il processo 0: Somma totale=791261.000000 in tempo 4.911423e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=10000
+
+Sono il processo 0: Somma totale=492241.000000 in tempo 4.196167e-05 secondi
+
+Sono il processo 0: Somma totale=491490.000000 in tempo 4.291534e-05 secondi
+
+Sono il processo 0: Somma totale=491490.000000 in tempo 4.100800e-05 secondi
+
+Sono il processo 0: Somma totale=496075.000000 in tempo 4.482269e-05 secondi
+
+Sono il processo 0: Somma totale=496075.000000 in tempo 4.291534e-05 secondi
+
+Sono il processo 0: Somma totale=495496.000000 in tempo 4.196167e-05 secondi
+
+Sono il processo 0: Somma totale=495496.000000 in tempo 4.196167e-05 secondi
+
+Sono il processo 0: Somma totale=490853.000000 in tempo 4.291534e-05 secondi
+
+Sono il processo 0: Somma totale=490853.000000 in tempo 3.910065e-05 secondi
+
+Sono il processo 0: Somma totale=496315.000000 in tempo 4.291534e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=20000
+
+Sono il processo 0: Somma totale=991593.000000 in tempo 4.911423e-05 secondi
+
+Sono il processo 0: Somma totale=982614.000000 in tempo 4.911423e-05 secondi
+
+Sono il processo 0: Somma totale=982614.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=989768.000000 in tempo 5.006790e-05 secondi
+
+Sono il processo 0: Somma totale=989768.000000 in tempo 4.911423e-05 secondi
+
+Sono il processo 0: Somma totale=996972.000000 in tempo 5.316734e-05 secondi
+
+Sono il processo 0: Somma totale=996972.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=985649.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=985649.000000 in tempo 5.197525e-05 secondi
+
+Sono il processo 0: Somma totale=991465.000000 in tempo 4.887581e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=40000
+
+Sono il processo 0: Somma totale=1980950.000000 in tempo 7.390976e-05 secondi
+
+Sono il processo 0: Somma totale=1980077.000000 in tempo 7.414818e-05 secondi
+
+Sono il processo 0: Somma totale=1980077.000000 in tempo 7.390976e-05 secondi
+
+Sono il processo 0: Somma totale=1986087.000000 in tempo 7.414818e-05 secondi
+
+Sono il processo 0: Somma totale=1986087.000000 in tempo 7.319450e-05 secondi
+
+Sono il processo 0: Somma totale=1978443.000000 in tempo 7.295609e-05 secondi
+
+Sono il processo 0: Somma totale=1978443.000000 in tempo 7.295609e-05 secondi
+
+Sono il processo 0: Somma totale=1983544.000000 in tempo 7.390976e-05 secondi
+
+Sono il processo 0: Somma totale=1983544.000000 in tempo 7.390976e-05 secondi
+
+Sono il processo 0: Somma totale=1983544.000000 in tempo 7.414818e-05 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=80000
+
+Sono il processo 0: Somma totale=3948445.000000 in tempo 1.161098e-04 secondi
+
+Sono il processo 0: Somma totale=3962552.000000 in tempo 1.161098e-04 secondi
+
+Sono il processo 0: Somma totale=3962552.000000 in tempo 1.170635e-04 secondi
+
+Sono il processo 0: Somma totale=3955982.000000 in tempo 1.180172e-04 secondi
+
+Sono il processo 0: Somma totale=3955982.000000 in tempo 1.130104e-04 secondi
+
+Sono il processo 0: Somma totale=3949206.000000 in tempo 1.151562e-04 secondi
+
+Sono il processo 0: Somma totale=3949206.000000 in tempo 1.158714e-04 secondi
+
+Sono il processo 0: Somma totale=3967405.000000 in tempo 1.180172e-04 secondi
+
+Sono il processo 0: Somma totale=3967405.000000 in tempo 1.111031e-04 secondi
+
+Sono il processo 0: Somma totale=3967405.000000 in tempo 1.161098e-04 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=160000
+
+Sono il processo 0: Somma totale=7939171.000000 in tempo 2.019405e-04 secondi
+
+Sono il processo 0: Somma totale=7939171.000000 in tempo 1.959801e-04 secondi
+
+Sono il processo 0: Somma totale=7935082.000000 in tempo 2.021790e-04 secondi
+
+Sono il processo 0: Somma totale=7935082.000000 in tempo 2.021790e-04 secondi
+
+Sono il processo 0: Somma totale=7906675.000000 in tempo 2.059937e-04 secondi
+
+Sono il processo 0: Somma totale=7925618.000000 in tempo 1.971722e-04 secondi
+
+Sono il processo 0: Somma totale=7925618.000000 in tempo 2.031326e-04 secondi
+
+Sono il processo 0: Somma totale=7926448.000000 in tempo 1.971722e-04 secondi
+
+Sono il processo 0: Somma totale=7926448.000000 in tempo 1.959801e-04 secondi
+
+Sono il processo 0: Somma totale=7926448.000000 in tempo 2.040863e-04 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=100000
+
+Sono il processo 0: Somma totale=4950360.000000 in tempo 1.318455e-04 secondi
+
+Sono il processo 0: Somma totale=4947464.000000 in tempo 1.380444e-04 secondi
+
+Sono il processo 0: Somma totale=4947464.000000 in tempo 1.370907e-04 secondi
+
+Sono il processo 0: Somma totale=4947464.000000 in tempo 1.380444e-04 secondi
+
+Sono il processo 0: Somma totale=4947457.000000 in tempo 1.378059e-04 secondi
+
+Sono il processo 0: Somma totale=4947457.000000 in tempo 1.318455e-04 secondi
+
+Sono il processo 0: Somma totale=4942570.000000 in tempo 1.380444e-04 secondi
+
+Sono il processo 0: Somma totale=4942570.000000 in tempo 1.327991e-04 secondi
+
+Sono il processo 0: Somma totale=4946133.000000 in tempo 1.389980e-04 secondi
+
+Sono il processo 0: Somma totale=4946133.000000 in tempo 1.380444e-04 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=200000
+
+Sono il processo 0: Somma totale=9896148.000000 in tempo 2.439022e-04 secondi
+
+Sono il processo 0: Somma totale=9896148.000000 in tempo 2.410412e-04 secondi
+
+Sono il processo 0: Somma totale=9895720.000000 in tempo 2.439022e-04 secondi
+
+Sono il processo 0: Somma totale=9895720.000000 in tempo 2.391338e-04 secondi
+
+Sono il processo 0: Somma totale=9899527.000000 in tempo 2.439022e-04 secondi
+
+Sono il processo 0: Somma totale=9899527.000000 in tempo 2.400875e-04 secondi
+
+Sono il processo 0: Somma totale=9906422.000000 in tempo 2.400875e-04 secondi
+
+Sono il processo 0: Somma totale=9906422.000000 in tempo 2.391338e-04 secondi
+
+Sono il processo 0: Somma totale=9906422.000000 in tempo 2.400875e-04 secondi
+
+Sono il processo 0: Somma totale=9910994.000000 in tempo 2.481937e-04 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=400000
+
+Sono il processo 0: Somma totale=19834219.000000 in tempo 4.529953e-04 secondi
+
+Sono il processo 0: Somma totale=19779174.000000 in tempo 4.580021e-04 secondi
+
+Sono il processo 0: Somma totale=19779174.000000 in tempo 4.529953e-04 secondi
+
+Sono il processo 0: Somma totale=19831902.000000 in tempo 4.570484e-04 secondi
+
+Sono il processo 0: Somma totale=19831902.000000 in tempo 4.529953e-04 secondi
+
+Sono il processo 0: Somma totale=19813443.000000 in tempo 4.529953e-04 secondi
+
+Sono il processo 0: Somma totale=19774497.000000 in tempo 4.580021e-04 secondi
+
+Sono il processo 0: Somma totale=19774497.000000 in tempo 4.558563e-04 secondi
+
+Sono il processo 0: Somma totale=19791374.000000 in tempo 4.580021e-04 secondi
+
+Sono il processo 0: Somma totale=19791374.000000 in tempo 4.591942e-04 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=800000
+
+Sono il processo 0: Somma totale=39593787.000000 in tempo 8.828640e-04 secondi
+
+Sono il processo 0: Somma totale=39564518.000000 in tempo 8.840561e-04 secondi
+
+Sono il processo 0: Somma totale=39613323.000000 in tempo 8.831024e-04 secondi
+
+Sono il processo 0: Somma totale=39613323.000000 in tempo 8.859634e-04 secondi
+
+Sono il processo 0: Somma totale=39622625.000000 in tempo 8.840561e-04 secondi
+
+Sono il processo 0: Somma totale=39622625.000000 in tempo 8.909702e-04 secondi
+
+Sono il processo 0: Somma totale=39565836.000000 in tempo 8.869171e-04 secondi
+
+Sono il processo 0: Somma totale=39565836.000000 in tempo 8.869171e-04 secondi
+
+Sono il processo 0: Somma totale=39591831.000000 in tempo 8.850098e-04 secondi
+
+Sono il processo 0: Somma totale=39591831.000000 in tempo 8.819103e-04 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=1600000
+
+Sono il processo 0: Somma totale=79132129.000000 in tempo 1.743078e-03 secondi
+
+Sono il processo 0: Somma totale=79157242.000000 in tempo 1.748085e-03 secondi
+
+Sono il processo 0: Somma totale=79157242.000000 in tempo 1.996040e-03 secondi
+
+Sono il processo 0: Somma totale=79154074.000000 in tempo 1.766920e-03 secondi
+
+Sono il processo 0: Somma totale=79154074.000000 in tempo 1.746178e-03 secondi
+
+Sono il processo 0: Somma totale=79242639.000000 in tempo 1.744986e-03 secondi
+
+Sono il processo 0: Somma totale=79227562.000000 in tempo 1.749039e-03 secondi
+
+Sono il processo 0: Somma totale=79227562.000000 in tempo 1.755953e-03 secondi
+
+Sono il processo 0: Somma totale=79168908.000000 in tempo 1.746893e-03 secondi
+
+Sono il processo 0: Somma totale=79168908.000000 in tempo 1.747131e-03 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=1000000
+
+Sono il processo 0: Somma totale=49477911.000000 in tempo 1.098871e-03 secondi
+
+Sono il processo 0: Somma totale=49477911.000000 in tempo 1.104116e-03 secondi
+
+Sono il processo 0: Somma totale=49481139.000000 in tempo 1.100779e-03 secondi
+
+Sono il processo 0: Somma totale=49486150.000000 in tempo 1.096010e-03 secondi
+
+Sono il processo 0: Somma totale=49486150.000000 in tempo 1.100063e-03 secondi
+
+Sono il processo 0: Somma totale=49535206.000000 in tempo 1.100063e-03 secondi
+
+Sono il processo 0: Somma totale=49535206.000000 in tempo 1.127005e-03 secondi
+
+Sono il processo 0: Somma totale=49470106.000000 in tempo 1.100063e-03 secondi
+
+Sono il processo 0: Somma totale=49470106.000000 in tempo 1.100063e-03 secondi
+
+Sono il processo 0: Somma totale=49567127.000000 in tempo 1.106977e-03 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=2000000
+
+Sono il processo 0: Somma totale=99120772.000000 in tempo 2.177000e-03 secondi
+
+Sono il processo 0: Somma totale=98939246.000000 in tempo 2.177954e-03 secondi
+
+Sono il processo 0: Somma totale=99003280.000000 in tempo 2.176046e-03 secondi
+
+Sono il processo 0: Somma totale=99003280.000000 in tempo 2.177954e-03 secondi
+
+Sono il processo 0: Somma totale=99051326.000000 in tempo 2.183199e-03 secondi
+
+Sono il processo 0: Somma totale=99051326.000000 in tempo 2.177000e-03 secondi
+
+Sono il processo 0: Somma totale=98914534.000000 in tempo 2.181053e-03 secondi
+
+Sono il processo 0: Somma totale=98992341.000000 in tempo 2.178907e-03 secondi
+
+Sono il processo 0: Somma totale=98992341.000000 in tempo 2.503157e-03 secondi
+
+Sono il processo 0: Somma totale=99014775.000000 in tempo 2.180815e-03 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=4000000
+
+Sono il processo 0: Somma totale=197914106.000000 in tempo 4.342079e-03 secondi
+
+Sono il processo 0: Somma totale=197914106.000000 in tempo 4.346132e-03 secondi
+
+Sono il processo 0: Somma totale=198013308.000000 in tempo 4.343033e-03 secondi
+
+Sono il processo 0: Somma totale=197985247.000000 in tempo 4.332066e-03 secondi
+
+Sono il processo 0: Somma totale=198068737.000000 in tempo 4.325151e-03 secondi
+
+Sono il processo 0: Somma totale=198068737.000000 in tempo 4.348040e-03 secondi
+
+Sono il processo 0: Somma totale=197908846.000000 in tempo 4.358053e-03 secondi
+
+Sono il processo 0: Somma totale=197930608.000000 in tempo 4.330873e-03 secondi
+
+Sono il processo 0: Somma totale=198084170.000000 in tempo 4.487991e-03 secondi
+
+Sono il processo 0: Somma totale=198084170.000000 in tempo 4.331827e-03 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=8000000
+
+Sono il processo 0: Somma totale=396090029.000000 in tempo 8.605003e-03 secondi
+
+Sono il processo 0: Somma totale=395888647.000000 in tempo 8.619070e-03 secondi
+
+Sono il processo 0: Somma totale=395987011.000000 in tempo 8.604050e-03 secondi
+
+Sono il processo 0: Somma totale=396090272.000000 in tempo 8.612871e-03 secondi
+
+Sono il processo 0: Somma totale=396003833.000000 in tempo 8.599997e-03 secondi
+
+Sono il processo 0: Somma totale=395962954.000000 in tempo 8.598089e-03 secondi
+
+Sono il processo 0: Somma totale=396011496.000000 in tempo 8.600950e-03 secondi
+
+Sono il processo 0: Somma totale=395919133.000000 in tempo 8.630037e-03 secondi
+
+Sono il processo 0: Somma totale=396055226.000000 in tempo 8.613825e-03 secondi
+
+Sono il processo 0: Somma totale=396070216.000000 in tempo 8.599997e-03 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=16000000
+
+Sono il processo 0: Somma totale=791824438.000000 in tempo 1.721716e-02 secondi
+
+Sono il processo 0: Somma totale=792116654.000000 in tempo 1.718307e-02 secondi
+
+Sono il processo 0: Somma totale=791915442.000000 in tempo 1.717496e-02 secondi
+
+Sono il processo 0: Somma totale=792307503.000000 in tempo 1.719308e-02 secondi
+
+Sono il processo 0: Somma totale=792043430.000000 in tempo 1.719284e-02 secondi
+
+Sono il processo 0: Somma totale=792213290.000000 in tempo 1.719999e-02 secondi
+
+Sono il processo 0: Somma totale=792119994.000000 in tempo 1.718616e-02 secondi
+
+Sono il processo 0: Somma totale=791986580.000000 in tempo 1.720214e-02 secondi
+
+Sono il processo 0: Somma totale=791833372.000000 in tempo 1.721692e-02 secondi
+
+Sono il processo 0: Somma totale=791994305.000000 in tempo 1.719308e-02 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=10000000
+
+Sono il processo 0: Somma totale=495155057.000000 in tempo 1.074290e-02 secondi
+
+Sono il processo 0: Somma totale=494994577.000000 in tempo 1.074195e-02 secondi
+
+Sono il processo 0: Somma totale=495109046.000000 in tempo 1.073909e-02 secondi
+
+Sono il processo 0: Somma totale=495021484.000000 in tempo 1.075602e-02 secondi
+
+Sono il processo 0: Somma totale=494861019.000000 in tempo 1.096797e-02 secondi
+
+Sono il processo 0: Somma totale=495005027.000000 in tempo 1.076484e-02 secondi
+
+Sono il processo 0: Somma totale=495138580.000000 in tempo 1.073217e-02 secondi
+
+Sono il processo 0: Somma totale=494978182.000000 in tempo 1.076603e-02 secondi
+
+Sono il processo 0: Somma totale=494987768.000000 in tempo 1.074195e-02 secondi
+
+Sono il processo 0: Somma totale=494911076.000000 in tempo 1.074886e-02 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=20000000
+
+Sono il processo 0: Somma totale=990003103.000000 in tempo 2.145982e-02 secondi
+
+Sono il processo 0: Somma totale=989953021.000000 in tempo 2.144313e-02 secondi
+
+Sono il processo 0: Somma totale=989921708.000000 in tempo 2.147412e-02 secondi
+
+Sono il processo 0: Somma totale=990065308.000000 in tempo 2.146411e-02 secondi
+
+Sono il processo 0: Somma totale=989919054.000000 in tempo 2.147007e-02 secondi
+
+Sono il processo 0: Somma totale=990067440.000000 in tempo 2.150798e-02 secondi
+
+Sono il processo 0: Somma totale=989906423.000000 in tempo 2.145505e-02 secondi
+
+Sono il processo 0: Somma totale=989910032.000000 in tempo 2.148819e-02 secondi
+
+Sono il processo 0: Somma totale=989889532.000000 in tempo 2.145004e-02 secondi
+
+Sono il processo 0: Somma totale=990109854.000000 in tempo 2.148199e-02 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=40000000
+
+Sono il processo 0: Somma totale=1980368765.000000 in tempo 4.286504e-02 secondi
+
+Sono il processo 0: Somma totale=1979606250.000000 in tempo 4.277396e-02 secondi
+
+Sono il processo 0: Somma totale=1979978437.000000 in tempo 4.277396e-02 secondi
+
+Sono il processo 0: Somma totale=1980286863.000000 in tempo 4.278898e-02 secondi
+
+Sono il processo 0: Somma totale=1980020121.000000 in tempo 4.277802e-02 secondi
+
+Sono il processo 0: Somma totale=1980055954.000000 in tempo 4.277515e-02 secondi
+
+Sono il processo 0: Somma totale=1980073834.000000 in tempo 4.280996e-02 secondi
+
+Sono il processo 0: Somma totale=1979877978.000000 in tempo 4.276800e-02 secondi
+
+Sono il processo 0: Somma totale=1979834437.000000 in tempo 4.278088e-02 secondi
+
+Sono il processo 0: Somma totale=1980034294.000000 in tempo 4.277587e-02 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=80000000
+
+Sono il processo 0: Somma totale=3960038222.000000 in tempo 8.551598e-02 secondi
+
+Sono il processo 0: Somma totale=3959812985.000000 in tempo 8.596087e-02 secondi
+
+Sono il processo 0: Somma totale=3959254632.000000 in tempo 8.547807e-02 secondi
+
+Sono il processo 0: Somma totale=3959864454.000000 in tempo 8.551383e-02 secondi
+
+Sono il processo 0: Somma totale=3960164210.000000 in tempo 8.545017e-02 secondi
+
+Sono il processo 0: Somma totale=3960029389.000000 in tempo 8.549500e-02 secondi
+
+Sono il processo 0: Somma totale=3960487123.000000 in tempo 8.556390e-02 secondi
+
+Sono il processo 0: Somma totale=3959641258.000000 in tempo 8.552504e-02 secondi
+
+Sono il processo 0: Somma totale=3960143046.000000 in tempo 8.566785e-02 secondi
+
+Sono il processo 0: Somma totale=3960109160.000000 in tempo 8.548498e-02 secondi
+Executing 10 times /homes/DMA/PDC/2024/SSVLSN00P/Progetto1/progetto1 with STRATEGY=3, P=4, N=160000000
+
+Sono il processo 0: Somma totale=7919704094.000000 in tempo 1.713140e-01 secondi
+
+Sono il processo 0: Somma totale=7920514531.000000 in tempo 1.710322e-01 secondi
+
+Sono il processo 0: Somma totale=7919952768.000000 in tempo 1.713531e-01 secondi
+
+Sono il processo 0: Somma totale=7920152061.000000 in tempo 1.708951e-01 secondi
+
+Sono il processo 0: Somma totale=7920185244.000000 in tempo 1.712670e-01 secondi
+
+Sono il processo 0: Somma totale=7919035478.000000 in tempo 1.710970e-01 secondi
+4 total processes killed (some possibly by mpiexec during cleanup)

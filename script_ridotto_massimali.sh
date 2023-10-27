@@ -21,6 +21,6 @@ for STRATEGY in "${STRATEGY_VALUES[@]}"; do
     if [[ "$STRATEGY" == "0" && $P -gt 1 ]]; then
       break  # Exit the P loop
     fi
-    qsub -v STRATEGY=$STRATEGY,P=$P progetto1_pbs_ridotto.pbs
+    qsub -v STRATEGY=$STRATEGY,P=$P progetto1_pbs_ridotto_massimali.apbs
   done
 done
